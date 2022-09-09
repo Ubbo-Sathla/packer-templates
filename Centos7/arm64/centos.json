@@ -1,0 +1,42 @@
+{
+    "builders": [
+      {
+        "type": "qemu",
+        "accelerator": "kvm",
+        "qemuargs": [
+          [
+            "-m",
+            "8192M"
+          ],
+          [
+            "-smp",
+            "cpus=1,maxcpus=16,cores=4"
+          ]
+        ],
+        "guest_os_type": "Centos",
+        "disk_interface": "virtio-scsi",
+        "machine_type": "q35",
+        "disk_compression": true,
+        "disk_size": 4096,
+        "format": "qcow2",
+        "net_device": "virtio-net",
+        "iso_url": "/opt/iso/CentOS-7-aarch64-Everything-2009.iso",
+        "iso_checksum": "md5:73c33f510f8428f2a7e0b972c1c89136",
+        "vm_name": "centos_aarch64",
+        "output_directory": "./_output",
+        "headless": true,
+        "vnc_bind_address": "0.0.0.0",
+        "vnc_use_password": true,
+        "http_directory": "http",
+        "ssh_username": "root",
+        "ssh_password": "Centos",
+        "ssh_timeout": "40m",
+        "qemu_binary": "/usr/local/qemu-4.2.0/bin/qemu-system-aarch64",
+        "boot_wait": "5s",
+        "boot_command": [
+          "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/onecloud-k8s-ks.cfg<enter><wait>"
+        ],
+        "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+      }
+    ]
+  }
