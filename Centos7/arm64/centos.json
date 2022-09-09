@@ -27,7 +27,7 @@
         "output_directory": "./_output",
         "headless": true,
         "vnc_bind_address": "0.0.0.0",
-        "vnc_use_password": true,
+        "vnc_use_password": false,
         "http_directory": "./",
         "ssh_username": "root",
         "ssh_password": "Centos",
