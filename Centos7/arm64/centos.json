@@ -2,20 +2,32 @@
     "builders": [
       {
         "type": "qemu",
-        "accelerator": "kvm",
         "qemuargs": [
           [
             "-m",
             "8192M"
           ],
-	  	      ["-cpu", "host"],
-        ["-bios", "/usr/share/ovmf/x64/OVMF.fd"],
+          [
+            "-cpu",
+            "host"
+          ],
+          [
+            "-bios",
+            "/opt/cloud/contrib/OVMF.fd"
+          ],
+          [
+            "-boot",
+            "strict=on"
+          ],
+          [
+            "-machine",
+            "virt,accel=kvm,gic-version=3"
+          ],
           [
             "-smp",
             "cpus=1,maxcpus=16,cores=4"
           ]
         ],
-        "guest_os_type": "Centos",
         "disk_interface": "virtio-scsi",
         "disk_compression": false,
         "disk_size": 4096,
@@ -27,21 +39,21 @@
         "output_directory": "./_output",
         "headless": true,
         "vnc_bind_address": "0.0.0.0",
-        "vnc_use_password": false,
+        "vnc_use_password": true,
         "http_directory": "./",
         "ssh_username": "root",
         "ssh_password": "Centos",
         "ssh_timeout": "40m",
         "qemu_binary": "/usr/local/qemu-4.2.0/bin/qemu-system-aarch64",
         "boot_wait": "5s",
-		        "boot_command": [
-					"c<wait>",
+        "boot_command": [
+          "c<wait>",
           "linuxefi /images/pxeboot/vmlinuz ",
-          "text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos7-ks-uefi.cfg<enter><wait>",
+          "text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/onecloud-k8s-ks.cfg<enter><wait>",
           "initrdefi /images/pxeboot/initrd.img",
-					"<enter><wait>",
+          "<enter><wait>",
           "boot",
-					"<enter><wait>"
+          "<enter><wait>"
         ],
         "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
       }
