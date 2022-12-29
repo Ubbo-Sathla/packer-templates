@@ -1,0 +1,58 @@
+{
+    "builders": [
+      {
+        "type": "qemu",
+        "qemuargs": [
+          [
+            "-m",
+            "8192M"
+          ],
+          [
+            "-cpu",
+            "host"
+          ],
+          [
+            "-bios",
+            "/usr/share/qemu/OVMF.fd"
+          ],
+          [
+            "-boot",
+            "strict=on"
+          ],
+          [
+            "-smp",
+            "cpus=1,maxcpus=16,cores=4"
+          ]
+        ],
+        "disk_interface": "virtio-scsi",
+	"machine_type": "q35",
+        "disk_compression": false,
+        "disk_size": 4096,
+        "format": "qcow2",
+        "net_device": "virtio-net",
+        "iso_url": "/opt/iso/CentOS-7-x86_64-Everything-2207-02.iso",
+        "iso_checksum": "md5:0bd00863e731bf5d17fff9c6b2390533",
+        "vm_name": "centos_amd64",
+        "output_directory": "./_output",
+        "headless": true,
+        "vnc_bind_address": "10.119.1.17",
+        "vnc_use_password": true,
+        "http_directory": "./",
+        "ssh_username": "root",
+        "ssh_password": "Centos",
+        "ssh_timeout": "40m",
+        "qemu_binary": "/usr/bin/qemu-system-x86_64",
+        "boot_wait": "5s",
+        "boot_command": [
+          "c<wait>",
+          "linuxefi /images/pxeboot/vmlinuz ",
+          "text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-ks.cfg<enter><wait>",
+          "initrdefi /images/pxeboot/initrd.img",
+          "<enter><wait>",
+          "boot",
+          "<enter><wait>"
+        ],
+        "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+      }
+    ]
+  }
