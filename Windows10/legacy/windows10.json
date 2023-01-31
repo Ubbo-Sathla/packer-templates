@@ -1,0 +1,42 @@
+{
+    "builders": [
+        {
+            "vm_name": "windows-10",
+            "type": "qemu",
+            "accelerator": "kvm",
+            "cpus": 8,
+            "memory": 16384,
+            "disk_size": 20480,
+            "disk_interface": "virtio-scsi",
+            "machine_type": "q35",
+            "disk_compression": false,
+            "format": "qcow2",
+            "iso_url": "/opt/iso/Win10_22H2_Chinese_Simplified_x64.iso",
+            "iso_checksum": "md5:d556c37fa7076682dfb778819266def4",
+            "floppy_files": [
+                "../common/autounattend.xml",
+                "../common/unattend.xml",
+                "../common/sysprep.bat",
+                "../common/winrm.ps1"
+            ],
+            "output_directory": "./_out",
+            "qemuargs": [
+                [
+                    "-cdrom",
+                    "/opt/iso/virtio-win.iso"
+                ]
+            ],
+            "headless": true,
+            "vnc_bind_address": "10.119.1.17",
+            "vnc_use_password": true,
+            "communicator": "winrm",
+            "winrm_username": "packer",
+            "winrm_password": "packer",
+            "winrm_use_ssl": "false",
+            "winrm_insecure": "true",
+            "winrm_timeout": "1h",
+            "shutdown_command": "A:\\sysprep.bat",
+            "shutdown_timeout": "25m"
+        }
+    ]
+}
