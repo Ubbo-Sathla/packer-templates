@@ -1,4 +1,12 @@
 {
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/vpp/repo.sh"
+      ]
+    }
+  ],
   "builders": [
     {
       "type": "qemu",
@@ -22,7 +30,7 @@
       ],
       "disk_interface": "virtio-scsi",
       "machine_type": "q35",
-      "disk_compression": false,
+      "disk_compression": true,
       "disk_size": 8192,
       "accelerator": "kvm",
       "format": "qcow2",
