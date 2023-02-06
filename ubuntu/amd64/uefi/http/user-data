@@ -41,7 +41,9 @@ autoinstall:
   - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/ubuntu
   storage:
     layout:
-      name: lvm
+      name: direct
+    swap:
+      size: 0
   network:
     ethernets:
       eth0:

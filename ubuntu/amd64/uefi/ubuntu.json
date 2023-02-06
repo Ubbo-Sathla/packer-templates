@@ -19,16 +19,21 @@
           "-cpu",
           "host"
         ],
-        [
-          "-boot",
-          "strict=on"
-        ],
+	          [ "-device", "virtio-scsi-pci" ],
+
+	[	"-device", "scsi-hd,drive=drive0,bootindex=0"],
+	          [ "-device", "scsi-cd,drive=cdrom0,bootindex=1" ],
+
+	    ["-bios", "/usr/share/OVMF/OVMF_CODE.fd"],
+
         [
           "-smp",
           "cpus=1,maxcpus=16,cores=4"
         ]
       ],
       "disk_interface": "virtio-scsi",
+              "cdrom_interface": "virtio-scsi",
+
       "machine_type": "q35",
       "disk_compression": true,
       "disk_size": 8192,
