@@ -17,7 +17,7 @@
                 "../common/autounattend.xml",
                 "../common/unattend.xml",
                 "../common/sysprep.bat",
-                "../common/winrm.ps1"
+                "../common/winrmConfig.bat"
             ],
             "output_directory": "./_out",
             "qemuargs": [
