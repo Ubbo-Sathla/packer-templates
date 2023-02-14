@@ -1,0 +1,50 @@
+{
+  "builders": [
+    {
+      "vm_name": "win2k16",
+      "type": "qemu",
+      "accelerator": "kvm",
+      "cpus": 8,
+      "memory": 16384,
+      "disk_size": 20480,
+      "machine_type": "q35",
+      "disk_interface": "virtio-scsi",
+      "disk_compression": false,
+      "format": "qcow2",
+      "iso_url": "/opt/iso/cn_windows_server_2016_x64_dvd_9718765.iso",
+      "iso_checksum": "md5:4f1e348b1333a19169f16145635c36c1",
+      "floppy_files": [
+        "./autounattend.xml",
+        "../common/unattend.xml",
+        "../common/sysprep.bat",
+        "../common/winrmConfig.bat"
+      ],
+      "output_directory": "./_out",
+      "qemuargs": [
+        [ "-bios", "/usr/share/OVMF/OVMF_CODE.fd" ],
+	[ "-device", "virtio-scsi-pci" ],
+	[ "-device", "scsi-hd,drive=drive0,bootindex=0" ],
+	[ "-device", "ide-cd,drive=cdrom0,bootindex=1,bus=ide.0" ],
+	[ "-device", "ide-cd,drive=cdrom1,bus=ide.1" ],
+	[ "-drive", "if=none,file=./_out/{{ .Name }},id=drive0,cache=writeback,discard=ignore" ],
+	[ "-drive", "if=none,file=/opt/iso/cn_windows_server_2016_x64_dvd_9718765.iso,id=cdrom0,media=cdrom" ],
+	[ "-drive", "if=none,file=/opt/iso/virtio-win.iso,id=cdrom1,media=cdrom" ]
+      ],
+      "boot_wait": "1s",
+      "boot_command": [
+        "<esc>"
+      ],
+      "headless": true,
+      "vnc_bind_address": "10.119.1.17",
+      "vnc_use_password": true,
+      "communicator": "winrm",
+      "winrm_username": "packer",
+      "winrm_password": "packer",
+      "winrm_use_ssl": "false",
+      "winrm_insecure": "true",
+      "winrm_timeout": "1h",
+      "shutdown_command": "A:\\sysprep.bat",
+      "shutdown_timeout": "25m"
+    }
+  ]
+}

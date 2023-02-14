@@ -14,7 +14,7 @@
             "iso_url": "/opt/iso/cn_windows_server_2016_x64_dvd_9718765.iso",
             "iso_checksum": "md5:4f1e348b1333a19169f16145635c36c1",
             "floppy_files": [
-                "../common/autounattend.xml",
+                "./autounattend.xml",
                 "../common/unattend.xml",
                 "../common/sysprep.bat",
                 "../common/winrmConfig.bat"
