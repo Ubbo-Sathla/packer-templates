@@ -1,7 +1,7 @@
 {
     "builders": [
         {
-            "vm_name": "windows-2016",
+            "vm_name": "win2k16",
             "type": "qemu",
             "accelerator": "kvm",
             "cpus": 8,
