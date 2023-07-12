@@ -6,7 +6,7 @@
             "accelerator": "kvm",
             "cpus": 8,
             "memory": 16384,
-            "disk_size": 11264 ,
+            "disk_size": 20480 ,
             "disk_interface": "virtio-scsi",
             "machine_type": "q35",
             "disk_compression": false,
@@ -27,7 +27,7 @@
                 ]
             ],
             "headless": true,
-            "vnc_bind_address": "10.119.1.17",
+            "vnc_bind_address": "10.119.1.20",
             "vnc_use_password": true,
             "communicator": "winrm",
             "winrm_username": "packer",
