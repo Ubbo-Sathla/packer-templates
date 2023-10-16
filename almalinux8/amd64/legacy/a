@@ -1,0 +1,1 @@
+socat conntrack ebtables ipvsadm ipset wget bind-utils bash-completion iproute-tc python3 lvm2 vim dstat nc sysstat
