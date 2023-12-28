@@ -3,7 +3,7 @@
     {
       "type": "shell",
       "scripts": [
-        "scripts/vpp/repo.sh"
+        "scripts/containerd/install.sh"
       ]
     }
   ],
@@ -36,7 +36,7 @@
       "vm_name": "ubuntu",
       "output_directory": "./_output",
       "headless": true,
-      "vnc_bind_address": "10.119.1.17",
+      "vnc_bind_address": "10.119.1.20",
       "vnc_use_password": true,
       "http_directory": "./http",
       "ssh_username": "ubuntu",
