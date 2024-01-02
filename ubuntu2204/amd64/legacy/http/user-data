@@ -18,11 +18,13 @@ autoinstall:
   identity:
     hostname: localhost
     # echo 'Ubuntu' | openssl passwd -1 -stdin
-    password: $1$6i90sdX4$s84yOP4amT12BIj8qxIqX1
-    realname: ubuntu
+    password: $1$gkh21oUp$6DTO2Mhm5U7QH326ffEeK1
     username: ubuntu
   kernel:
     package: linux-generic
+  packages:
+    - gcc
+    - make
   keyboard:
     layout: us
     toggle: null
@@ -36,16 +38,16 @@ autoinstall:
     install-server: true
   user-data:
     disable_root: false
+  timezone: Asia/Shanghai
   late-commands:
   - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
+  - echo 'PATH="/usr/local/cuda/bin:/usr/local/python/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"' > /target/etc/environment
+  - sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /target/etc/ssh/sshd_config
   - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/ubuntu
+
   storage:
     layout:
       name: direct
     swap:
       size: 0
-  network:
-    ethernets:
-      eth0:
-        dhcp4: true
     version: 2

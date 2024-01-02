@@ -1,5 +1,5 @@
 build:
-	PACKER_LOG=1  /usr/local/bin/packer build -force ubuntu.json
+	PACKER_LOG=1  /usr/local/bin/packer build -force ubuntu-jammy.pkr.hcl
 sysprep:
 	virt-sysprep --operations abrt-data,backup-files,bash-history,blkid-tab,crash-data,cron-spool,dhcp-client-state,dhcp-server-state,dovecot-data,logfiles,machine-id,mail-spool,net-hostname,net-hwaddr,pacct-log,package-manager-cache,pam-data,passwd-backups,puppet-data-log,rh-subscription-manager,rhn-systemid,rpm-db,samba-db-log,script,smolt-uuid,ssh-userdir,sssd-db-log,tmp-files,udev-persistent-net,utmp,yum-uuid,customize -a _output/ubuntu
 install:

@@ -19,9 +19,9 @@ source "qemu" "ubuntu" {
   accelerator      = "kvm"
   boot_command     = ["e<down><down><down><end>", " autoinstall ip=dhcp ds=\"nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/\"", "<F10>"]
   boot_wait        = "5s"
-  disk_compression = true
+  disk_compression = false
   disk_interface   = "virtio-scsi"
-  disk_size        = 8192
+  disk_size        = "40G"
   format           = "qcow2"
   headless         = true
   http_directory   = "./http"
@@ -30,7 +30,8 @@ source "qemu" "ubuntu" {
   machine_type     = "q35"
   net_device       = "virtio-net"
   output_directory = "./_output"
-  qemu_binary      = "/usr/bin/qemu-system-x86_64"
+  qemu_binary      = "/usr/local/qemu-7.2.1/bin/qemu-system-x86_64"
+  # qemuargs         = [["-m", "8192M"], ["-cpu", "host"], ["-smp", "cpus=1,maxcpus=16,cores=4"],["-device", "vfio-pci,host=af:00.0,multifunction=on"],[ "-device", "vfio-pci,host=af:00.1"]]
   qemuargs         = [["-m", "8192M"], ["-cpu", "host"], ["-smp", "cpus=1,maxcpus=16,cores=4"]]
   shutdown_command = "echo 'packer' | sudo -S shutdown -P now"
   ssh_password     = "Ubuntu"
@@ -48,7 +49,10 @@ build {
   sources = ["source.qemu.ubuntu"]
 
   provisioner "shell" {
-    scripts = ["scripts/nvidia/install.sh"]
+    scripts = [
+      "scripts/nvidia/install.sh",
+      "scripts/cloud-init.sh"
+    ]
   }
 
 }
